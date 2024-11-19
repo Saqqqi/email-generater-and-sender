@@ -1,4 +1,3 @@
-
 from flask import Flask, request, render_template, redirect, url_for
 import pandas as pd
 import smtplib
@@ -16,10 +15,11 @@ log_file_name = f'email_log_{datetime.now().strftime("%Y%m%d_%H%M%S")}.txt'
 
 # Function to send email
 def send_email(to_email, business_name, email_template):
-    smtp_server = 'globaldigitsolutions.com'
-    smtp_port = 465
-    sender_email = 'smtptest@globaldigitsolutions.com'  # Replace with your email
-    sender_password = 'X;A8m.,kzOon'  # Replace with your email password
+    # Use environment variables for SMTP settings
+    smtp_server = os.getenv("SMTP_SERVER")
+    smtp_port = int(os.getenv("SMTP_PORT"))
+    sender_email = os.getenv("SENDER_EMAIL")
+    sender_password = os.getenv("SENDER_PASSWORD")
 
     subject = "Freelance Recruitment Application"
     body = email_template.replace("{business_name}", business_name)
@@ -30,7 +30,7 @@ def send_email(to_email, business_name, email_template):
     msg['To'] = to_email
 
     try:
-        server = smtplib.SMTP_SSL(smtp_server, smtp_port) 
+        server = smtplib.SMTP_SSL(smtp_server, smtp_port)
         server.login(sender_email, sender_password)
         server.sendmail(sender_email, to_email, msg.as_string())
         server.quit()
@@ -60,11 +60,9 @@ def index():
         if file:
             # Read the data from the uploaded Excel file
             try:
-                df = pd.read_excel(file)
+                df = pd.read_excel(file.read())  # Read directly from the file stream
                 df.columns = df.columns.str.strip()  # Remove leading/trailing spaces
-                
-                # Print the column names for debugging
-                print("Columns in the uploaded file:", df.columns.tolist())
+                print("Columns in the uploaded file:", df.columns.tolist())  # Debugging
                 
                 # Check if required columns exist
                 if 'Email' not in df.columns or 'Business Name' not in df.columns:
