@@ -1,7 +1,7 @@
 from flask import Flask, request, render_template, redirect, url_for
 import pandas as pd
 import smtplib
-from dotenv import load_dotenv
+
 from email.mime.text import MIMEText
 import os
 import time
@@ -12,7 +12,7 @@ import sys
 app = Flask(__name__)
 
 # Load environment variables from .env file
-load_dotenv()
+
 
 # Global variable to store log file name
 log_file_name = f'email_log_{datetime.now().strftime("%Y%m%d_%H%M%S")}.txt'
@@ -20,10 +20,10 @@ log_file_name = f'email_log_{datetime.now().strftime("%Y%m%d_%H%M%S")}.txt'
 # Function to send email
 def send_email(to_email, business_name, email_template):
     # Use environment variables for SMTP settings
-    smtp_server = os.getenv("SMTP_SERVER")
-    smtp_port = int(os.getenv("SMTP_PORT"))
-    sender_email = os.getenv("SENDER_EMAIL")
-    sender_password = os.getenv("SENDER_PASSWORD")
+smtp_server = 'globaldigitsolutions.com'  # Your SMTP server
+smtp_port = 465  # SMTP port
+sender_email = 'smtptest@globaldigitsolutions.com'  # Your sender email address
+sender_password = 'X;A8m.,kzOon'  # Your email password
 
     subject = "Freelance Recruitment Application"
     body = email_template.replace("{business_name}", business_name)
