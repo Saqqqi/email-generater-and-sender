@@ -11,9 +11,12 @@ import sys
 
 app = Flask(__name__)
 
+# Load environment variables from .env file
+load_dotenv()
+
 # Global variable to store log file name
 log_file_name = f'email_log_{datetime.now().strftime("%Y%m%d_%H%M%S")}.txt'
-load_dotenv()
+
 # Function to send email
 def send_email(to_email, business_name, email_template):
     # Use environment variables for SMTP settings
