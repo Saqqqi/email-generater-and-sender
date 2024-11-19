@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Sender</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #a38fba; 
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #fff; /* White color for the header */
+        }
+        form {
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0.5, 0.5, 0.5, 0.5); 
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
+        }
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+            margin: 20px auto;
+        }
+        textarea {
+            width: 90%;
+            padding: 10px 15px;
+            border: 1px solid #577a57;
+            border-radius: 20px;
+            margin: 20px auto;
+            resize: vertical;
+            box-shadow: 0 2px 5px rgba(0.5, 0.5, 0.5, 0.5); 
+            font-size: 14px; /* Increased font size for readability */
+            transition: border-color 0.3s; /* Smooth transition for border color */
+        }
+        textarea:focus {
+            border-color: #577a57; /* Change border color on focus */
+            outline: none; /* Remove default outline */
+        }
+        input[type="file"] {
+            margin-top: 10px;
+        }
+        input[type="submit"] {
+            background: linear-gradient(90deg, #577a57, #906ac4); /* Gradient colors */
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 20px auto; /* Center the button */
+            display: block;
+            width: 25%; /* Set width to 25% */
+            text-align: center; /* Center text inside the button */
+        }
+        input[type="submit"]:hover {
+            background: linear-gradient(90deg, #906ac4, #577a57); /* Reverse gradient on hover */
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            color: white; /* White color for the footer text */
+            font-size: 14px; /* Font size for footer */
+        }
+    </style>
+</head>
+<body>
+    <h1>Send Emails</h1>
+    <form method="post" enctype="multipart/form-data">
+        <label for="template">Email Template (HTML):</label>
+        <textarea id="template" name="template" rows="10" required></textarea>
+        
+        <label for="file">Upload Excel File:</label>
+        <input type="file" id="file" name="file" accept=".xlsx" required>
+        
+        <input type="submit" value="Send Emails">
+    </form>
+    <div class="footer">
+        Powered by ❤️ Shewana Iqbal
+    </div>
+</body>
+</html>
